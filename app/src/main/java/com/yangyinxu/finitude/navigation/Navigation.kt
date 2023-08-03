@@ -10,7 +10,7 @@ import com.yangyinxu.finitude.presentation.settings.SettingsScreen
 import com.yangyinxu.finitude.util.Constants
 
 @Composable
-fun SetupNavigation(
+fun Navigation(
     navController: NavHostController,
     // sharedViewModel: SharedViewModel
 ) {
