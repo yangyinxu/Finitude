@@ -1,7 +1,6 @@
 package com.yangyinxu.finitude.presentation.bottomNavBar
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Badge
 import androidx.compose.material.BadgedBox
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
