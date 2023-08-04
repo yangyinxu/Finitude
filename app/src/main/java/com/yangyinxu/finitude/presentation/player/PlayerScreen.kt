@@ -3,10 +3,9 @@ package com.yangyinxu.finitude.presentation.player
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,10 +31,9 @@ fun PlayerScreen(
     selectVideoLauncher: ManagedActivityResultLauncher<String, Uri?>,
     lifecycle: Lifecycle.Event
 ) {
-    Column(
+    Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+            .fillMaxWidth()
     ) {
         AndroidView(
             factory = { context ->
@@ -58,12 +56,23 @@ fun PlayerScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 // TODO: should be adjusted for different screen size
-                .aspectRatio(16 / 9f)
+                // .aspectRatio()
         )
-        Spacer(
-            modifier = Modifier
-                .height(8.dp)
+        PlayerTools(
+            viewModel,
+            videoItems,
+            selectVideoLauncher
         )
+    }
+}
+
+@Composable
+fun PlayerTools(
+    viewModel: MainViewModel,
+    videoItems: List<VideoItem>,
+    selectVideoLauncher: ManagedActivityResultLauncher<String, Uri?>
+) {
+    Column {
         IconButton(
             onClick = {
                 // Note: this filters the file by file type

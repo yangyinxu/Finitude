@@ -23,4 +23,4 @@ val LightGreen = Color(0xFFE7ED9B)
 
 val Colors.postBgColor: Color
     @Composable
-    get() = if (isLight) MediumGray else DarkGray
+    get() = if (isLight) LightGray else DarkGray

@@ -18,7 +18,6 @@ import com.yangyinxu.finitude.util.Constants
 
 @Composable
 fun SetupNavigation(
-    bottomNavBarPadding: PaddingValues,
     navController: NavHostController,
     viewModel: MainViewModel,
     videoItems: List<VideoItem>,
@@ -31,14 +30,10 @@ fun SetupNavigation(
         startDestination = Constants.ROUTE_HOME
     ) {
         composable(Constants.ROUTE_HOME) {
-            HomeScreen(
-                bottomNavBarPadding
-            )
+            HomeScreen()
         }
         composable(Constants.ROUTE_CHAT) {
-            ChatScreen(
-                bottomNavBarPadding
-            )
+            ChatScreen()
         }
         composable(Constants.ROUTE_PLAYER) {
             PlayerScreen(
@@ -48,9 +43,7 @@ fun SetupNavigation(
                 lifecycle = lifecycle)
         }
         composable(Constants.ROUTE_SETTINGS) {
-            SettingsScreen(
-                bottomNavBarPadding
-            )
+            SettingsScreen()
         }
     }
 }

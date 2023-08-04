@@ -4,6 +4,6 @@
     <style name="Theme.Finitude" parent="android:Theme.Material.Light.NoActionBar">
         <!-- Status bar -->
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

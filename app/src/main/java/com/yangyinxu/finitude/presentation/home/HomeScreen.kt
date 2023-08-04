@@ -2,6 +2,8 @@ package com.yangyinxu.finitude.presentation.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -15,15 +17,11 @@ import com.yangyinxu.finitude.R
 import com.yangyinxu.finitude.presentation.posts.PostItem
 
 @Composable
-fun HomeScreen(bottomNavBarPadding: PaddingValues) {
-    val state = rememberLazyGridState()
+fun HomeScreen(
 
-    Box(
-        modifier = Modifier
-            .padding(bottomNavBarPadding)
-    ) {
-        HomeScreenContent(state = state)
-    }
+) {
+    val state = rememberLazyGridState()
+    HomeScreenContent(state = state)
 }
 
 @Composable
