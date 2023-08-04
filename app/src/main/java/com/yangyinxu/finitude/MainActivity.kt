@@ -18,7 +18,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.compose.rememberNavController
-import com.yangyinxu.finitude.presentation.player.PlayerScreen
+import com.yangyinxu.finitude.navigation.SetupNavigation
+import com.yangyinxu.finitude.presentation.bottomNavBar.MainBottomNavBar
 import com.yangyinxu.finitude.ui.theme.FinitudeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +40,8 @@ class MainActivity : ComponentActivity() {
                         uri?.let(viewModel::addVideoUri)
                     }
                 )
+                // TODO: Look for a better way to pause the player when
+                //  the activity is paused
                 // this variable will help sync the lifecycle with the player
                 var lifecycle by remember {
                     mutableStateOf(Lifecycle.Event.ON_CREATE)
@@ -58,24 +61,20 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                PlayerScreen(
-                    viewModel,
-                    videoItems,
-                    selectVideoLauncher,
-                    lifecycle
-                )
-
-                /*
                 Scaffold(
                     bottomBar = {
                         MainBottomNavBar(navController = navController)
                     }
-                ) {
-                    Navigation(
-                        navController = navController
+                ) { bottomNavBarPadding ->
+                    SetupNavigation(
+                        bottomNavBarPadding = bottomNavBarPadding,
+                        navController = navController,
+                        viewModel = viewModel,
+                        videoItems = videoItems,
+                        selectVideoLauncher = selectVideoLauncher,
+                        lifecycle = lifecycle
                     )
                 }
-                 */
             }
         }
     }

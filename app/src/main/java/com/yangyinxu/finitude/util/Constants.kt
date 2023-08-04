@@ -5,6 +5,7 @@ object Constants {
     // routes
     const val ROUTE_HOME = "home"
     const val ROUTE_CHAT = "chat"
+    const val ROUTE_PLAYER = "player"
     const val ROUTE_SETTINGS = "settings"
 
     // player

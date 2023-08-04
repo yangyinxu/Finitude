@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -92,6 +93,11 @@ fun MainBottomNavBar(
                 name = "Chat",
                 route = Constants.ROUTE_CHAT,
                 icon = Icons.Default.Chat
+            ),
+            BottomNavItem(
+                name = "PLAYER",
+                route = Constants.ROUTE_PLAYER,
+                icon = Icons.Default.PlayCircle
             ),
             BottomNavItem(
                 name = "Settings",
