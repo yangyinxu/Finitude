@@ -8,6 +8,11 @@ object Constants {
     const val ROUTE_PLAYER = "player"
     const val ROUTE_SETTINGS = "settings"
 
+    const val ROUTE_POST_DETAILS = "postDetails/{postId}"
+
+    // nav arguments
+    const val POST_DETAILS_ARGUMENT_KEY = "postId"
+
     // player
     const val PLAYER_CONTENT_URI_SCHEME = "content"
     const val PLAYER_VIDEO_URIS_KEY = "videoUris"
