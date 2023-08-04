@@ -4,7 +4,7 @@ buildscript {
 
         compose_version = '1.4.0'
         nav_version = '2.4.2'
-        hilt_version = '2.41'
+        hilt_version = '2.42'
         media3_version = '1.1.0'
     }
     dependencies {
