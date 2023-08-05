@@ -91,14 +91,12 @@ fun PlayerTools(
         )
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
         ) {
             items(videoItems.size) { index ->
                 val videoItem = videoItems[index]
                 Text(
                     text = videoItem.name,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clickable {
                             viewModel.playVideo(videoItem.contentUri)
                         }

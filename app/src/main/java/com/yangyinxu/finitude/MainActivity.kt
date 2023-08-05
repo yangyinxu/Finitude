@@ -56,6 +56,12 @@ class MainActivity : ComponentActivity() {
                     contract = ActivityResultContracts.GetContent(),
                     onResult = { uri ->
                         // if the uri exist, add to the viewmodel
+                        for (videoItem in videoItems) {
+                            if (videoItem.contentUri == uri) {
+                                // return if the given contentUri already exists
+                                return@rememberLauncherForActivityResult
+                            }
+                        }
                         uri?.let(viewModel::addVideoUri)
                     }
                 )
@@ -90,15 +96,6 @@ class MainActivity : ComponentActivity() {
                         super.onPlaybackStateChanged(playbackState)
                         // Player.STATE_BUFFERING
                         isPlayReady = playbackState == Player.STATE_READY
-                    }
-
-                    override fun onIsPlayingChanged(isPlaying: Boolean) {
-                        super.onIsPlayingChanged(isPlaying)
-                        Log.e("info", "is playing: " + isPlaying)
-                        /*
-                        isPlayReady = isPlaying
-
-                         */
                     }
                 }
                 viewModel.player.addListener(playerListener)
