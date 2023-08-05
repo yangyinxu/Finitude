@@ -2,6 +2,7 @@ package com.yangyinxu.finitude.navigation
 
 import androidx.navigation.NavHostController
 import com.yangyinxu.finitude.util.Constants.ROUTE_HOME
+import com.yangyinxu.finitude.util.Constants.ROUTE_PLAYER
 
 class Screens(navController: NavHostController) {
 
@@ -15,5 +16,9 @@ class Screens(navController: NavHostController) {
 
     val postDetails: (Int) -> Unit = { postId ->
         navController.navigate("postDetails/$postId")
+    }
+
+    val player: () -> Unit = {
+        navController.navigate(ROUTE_PLAYER)
     }
 }

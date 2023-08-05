@@ -24,3 +24,11 @@ val LightGreen = Color(0xFFE7ED9B)
 val Colors.postBgColor: Color
     @Composable
     get() = if (isLight) LightGray else DarkGray
+
+val Colors.topAppBarContentColor: Color
+    @Composable
+    get() = if (isLight) DarkGray else LightGray
+
+val Colors.topAppBarBackgroundColor: Color
+    @Composable
+    get() = if (isLight) LightGray else DarkGray

@@ -1,7 +1,9 @@
 package com.yangyinxu.finitude
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -24,10 +26,14 @@ import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.yangyinxu.finitude.navigation.SetupNavigation
 import com.yangyinxu.finitude.presentation.bottomNavBar.MainBottomNavBar
 import com.yangyinxu.finitude.ui.theme.FinitudeTheme
+import com.yangyinxu.finitude.util.Constants.ROUTE_PLAYER
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,9 +80,26 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                // Player UI control
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+                val systemUiController: SystemUiController = rememberSystemUiController()
                 Scaffold(
                     bottomBar = {
-                        MainBottomNavBar(navController = navController)
+                        // hide system UI
+                        systemUiController.isStatusBarVisible = (currentRoute != ROUTE_PLAYER) // Status bar
+                        systemUiController.isNavigationBarVisible = (currentRoute != ROUTE_PLAYER) // Navigation bar
+                        systemUiController.isSystemBarsVisible = (currentRoute != ROUTE_PLAYER) // Status & Navigation bars
+                        // lock to landscape mode for player
+                        if (currentRoute == ROUTE_PLAYER) {
+                            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                        } else {
+                            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                        }
+                        // hide the bottom bar when the route is player
+                        if (currentRoute != ROUTE_PLAYER) {
+                            MainBottomNavBar(navController = navController)
+                        }
                     }
                 ) { bottomNavBarPadding ->
                     Box(

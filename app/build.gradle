@@ -84,6 +84,9 @@ dependencies {
     implementation "androidx.media3:media3-exoplayer:$media3_version"
     implementation "androidx.media3:media3-ui:$media3_version"
 
+    // system ui controller
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.2-alpha")
+
     // Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
 }

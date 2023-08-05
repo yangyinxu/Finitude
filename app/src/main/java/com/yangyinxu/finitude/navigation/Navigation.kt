@@ -44,7 +44,8 @@ fun SetupNavigation(
             route = Constants.ROUTE_HOME
         ) {
             HomeScreen(
-                navigateToPostDetails = screen.postDetails
+                navigateToPostDetails = screen.postDetails,
+                navigateToPlayer = screen.player
             )
         }
         composable(
