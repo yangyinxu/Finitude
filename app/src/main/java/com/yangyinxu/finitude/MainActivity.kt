@@ -3,7 +3,6 @@ package com.yangyinxu.finitude
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -87,15 +86,22 @@ class MainActivity : ComponentActivity() {
                 }
 
                 // Mini Player UI control
-                val isInitiallyPlaying = viewModel.player.isPlaying
                 var isPlayReady by remember {
-                    mutableStateOf(isInitiallyPlaying)
+                    mutableStateOf(viewModel.player.playbackState == Player.STATE_READY)
+                }
+                var isContentPlaying by remember {
+                    mutableStateOf(viewModel.player.isPlaying)
                 }
                 val playerListener = object: Player.Listener {
                     override fun onPlaybackStateChanged(playbackState: Int) {
                         super.onPlaybackStateChanged(playbackState)
                         // Player.STATE_BUFFERING
                         isPlayReady = playbackState == Player.STATE_READY
+                    }
+
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        super.onIsPlayingChanged(isPlaying)
+                        isContentPlaying = isPlaying
                     }
                 }
                 viewModel.player.addListener(playerListener)
@@ -120,8 +126,10 @@ class MainActivity : ComponentActivity() {
                         if (currentRoute != ROUTE_PLAYER) {
                             MainBottomNavBar(
                                 navController = navController,
+                                viewModel = viewModel,
                                 videoItems = videoItems,
-                                isPlaying = isPlayReady
+                                isPlayReady = isPlayReady,
+                                isPlaying = isContentPlaying
                             )
                         }
                     }

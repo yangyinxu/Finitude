@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.yangyinxu.finitude.MainViewModel
 import com.yangyinxu.finitude.presentation.screens.player.MiniPlayerControl
 import com.yangyinxu.finitude.presentation.screens.player.VideoItem
 import com.yangyinxu.finitude.ui.theme.appBarBackgroundColor
@@ -84,13 +85,17 @@ fun BottomNavBar(
 @Composable
 fun MainBottomNavBar(
     navController: NavController,
+    viewModel: MainViewModel?,
     videoItems: List<VideoItem>,
+    isPlayReady: Boolean,
     isPlaying: Boolean
 ) {
     Column {
-        if (isPlaying) {
+        if (isPlayReady) {
             MiniPlayerControl(
-                videoItems = videoItems
+                viewModel = viewModel,
+                videoItems = videoItems,
+                isPlaying = isPlaying
             )
         }
 
@@ -131,7 +136,9 @@ fun MainBottomNavBarPreview() {
     val navController = rememberNavController()
     MainBottomNavBar(
         navController = navController,
+        viewModel = null,
         videoItems = ArrayList(),
+        isPlayReady = true,
         isPlaying = true
     )
 }
