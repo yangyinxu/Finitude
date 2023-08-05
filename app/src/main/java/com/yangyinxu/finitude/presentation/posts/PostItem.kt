@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yangyinxu.finitude.R
+import com.yangyinxu.finitude.ui.theme.MEDIUM_PADDING
 import com.yangyinxu.finitude.ui.theme.postBgColor
 
 @Composable
@@ -85,7 +86,7 @@ fun PostTitle(
     Row {
         Text(
             modifier = Modifier
-                .padding(bottom = 10.dp),
+                .padding(bottom = MEDIUM_PADDING),
             text = title,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
@@ -113,9 +114,11 @@ fun PostContent(
         }
         Text(
             modifier = Modifier
-                .padding(start = 10.dp)
+                .padding(start = MEDIUM_PADDING)
                 .clip(RoundedCornerShape(10.dp)),
-            text = description
+            text = description,
+            maxLines = 7,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
