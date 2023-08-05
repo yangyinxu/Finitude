@@ -107,7 +107,11 @@ fun MainBottomNavBar(
         ),
         navController = navController,
         onItemClick = {
-            navController.navigate(it.route)
+            navController.navigate(it.route) {
+                popUpTo(navController.graph.id) {
+                    inclusive = false
+                }
+            }
         }
     )
 }

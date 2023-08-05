@@ -7,7 +7,9 @@ class Screens(navController: NavHostController) {
 
     val home: () -> Unit = {
         navController.navigate(ROUTE_HOME) {
-            popUpTo(ROUTE_HOME)
+            popUpTo(navController.graph.id) {
+                inclusive = false
+            }
         }
     }
 
