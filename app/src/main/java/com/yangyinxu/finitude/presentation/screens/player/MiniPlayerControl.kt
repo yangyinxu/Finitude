@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yangyinxu.finitude.MainViewModel
@@ -33,6 +34,8 @@ fun MiniPlayerControl(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colors.appBarBackgroundColor)
+            .padding(horizontal = LARGE_PADDING),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         var filename = "Unknown filename"
         if (videoItems.isNotEmpty()) {
@@ -40,9 +43,9 @@ fun MiniPlayerControl(
         }
         Text(
             modifier = Modifier
-                .weight(8f),
+                .weight(5f),
             text = "Playing: $filename",
-            color = MaterialTheme.colors.appBarContentColor
+            color = MaterialTheme.colors.appBarContentColor,
         )
         Box(modifier = Modifier
             .weight(1f),
@@ -82,7 +85,7 @@ fun MiniPlayerControlPreView() {
 fun PlayIcon() {
     Icon(
         modifier = Modifier
-            .size(50.dp)
+            .size(75.dp)
             .padding(LARGE_PADDING),
         imageVector = Icons.Default.PlayArrow,
         contentDescription = "Play Icon"
@@ -94,7 +97,7 @@ fun PlayIcon() {
 fun PauseIcon() {
     Icon(
         modifier = Modifier
-            .size(50.dp)
+            .size(75.dp)
             .padding(LARGE_PADDING),
         imageVector = Icons.Default.Pause,
         contentDescription = "Play Icon"
