@@ -22,6 +22,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.media3.ui.PlayerView
 import com.yangyinxu.finitude.MainViewModel
+import com.yangyinxu.finitude.ui.theme.LARGE_PADDING
 import com.yangyinxu.finitude.util.Constants.PLAYER_INPUT_STRING
 
 @Composable
@@ -100,7 +101,7 @@ fun PlayerTools(
                         .clickable {
                             viewModel.playVideo(videoItem.contentUri)
                         }
-                        .padding(16.dp)
+                        .padding(LARGE_PADDING)
                 )
             }
         }

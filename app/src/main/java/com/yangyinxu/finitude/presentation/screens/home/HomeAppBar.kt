@@ -8,6 +8,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.yangyinxu.finitude.ui.theme.*
 
 @Composable
@@ -24,6 +25,14 @@ fun DefaultHomeAppBar(
             PlayerAction(onPlayerClicked)
         },
         backgroundColor = MaterialTheme.colors.appBarBackgroundColor
+    )
+}
+
+@Composable
+@Preview
+fun DefaultHomeAppBarPreview() {
+    DefaultHomeAppBar(
+        onPlayerClicked = {}
     )
 }
 

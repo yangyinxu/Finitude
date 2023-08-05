@@ -38,18 +38,18 @@ fun PostItem(
 ) {
     Surface(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(MEDIUM_PADDING)
             .aspectRatio(2f)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colors.postBgColor)
             .border(
                 border = BorderStroke(2.dp, Color.DarkGray),
-                shape = RoundedCornerShape(20.dp)
+                shape = MaterialTheme.shapes.large
             )
             .clickable {
                 navigateToPostDetails(id)
             }
-            .padding(10.dp),
+            .padding(MEDIUM_PADDING),
     ) {
         Column(
             modifier = Modifier
@@ -103,7 +103,7 @@ fun PostItemContent(
         if (imageUrl.isNotEmpty()) {
             AsyncImage(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp)),
+                    .clip(MaterialTheme.shapes.medium),
                 model = imageUrl,
                 contentDescription = "Post Image"
             )
