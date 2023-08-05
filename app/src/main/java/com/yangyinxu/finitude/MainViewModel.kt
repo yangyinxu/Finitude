@@ -37,7 +37,7 @@ class MainViewModel @Inject constructor(
             VideoItem(
                 contentUri = uri,
                 mediaItem = MediaItem.fromUri(uri),
-                name = metadataReader.getMetadataFromUri(uri)?.fileName ?: "No name"
+                name = metadataReader.getMetadataFromUri(uri)?.fileName ?: "No name",
             )
         }
     }.stateIn(

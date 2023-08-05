@@ -5,6 +5,7 @@ import androidx.compose.material.BadgedBox
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
@@ -21,6 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.yangyinxu.finitude.presentation.screens.player.MiniPlayerControl
+import com.yangyinxu.finitude.presentation.screens.player.VideoItem
+import com.yangyinxu.finitude.ui.theme.appBarBackgroundColor
 import com.yangyinxu.finitude.util.Constants
 
 @Composable
@@ -33,7 +37,7 @@ fun BottomNavBar(
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = Color.DarkGray,
+        backgroundColor = MaterialTheme.colors.appBarBackgroundColor,
         elevation = 5.dp
     ) {
         items.forEach { item ->
@@ -79,35 +83,46 @@ fun BottomNavBar(
 
 @Composable
 fun MainBottomNavBar(
-    navController: NavController
+    navController: NavController,
+    videoItems: List<VideoItem>,
+    isPlaying: Boolean
 ) {
-    BottomNavBar(
-        items = listOf(
-            BottomNavItem(
-                name = "Home",
-                route = Constants.ROUTE_HOME,
-                icon = Icons.Default.Home
-            ),
-            BottomNavItem(
-                name = "Chat",
-                route = Constants.ROUTE_CHAT,
-                icon = Icons.Default.Chat
-            ),
-            BottomNavItem(
-                name = "Settings",
-                route = Constants.ROUTE_SETTINGS,
-                icon = Icons.Default.Settings
+    Column {
+        if (isPlaying) {
+            MiniPlayerControl(
+                videoItems = videoItems
             )
-        ),
-        navController = navController,
-        onItemClick = {
-            navController.navigate(it.route) {
-                popUpTo(navController.graph.id) {
-                    inclusive = false
+        }
+
+        BottomNavBar(
+            items = listOf(
+                BottomNavItem(
+                    name = "Home",
+                    route = Constants.ROUTE_HOME,
+                    icon = Icons.Default.Home
+                ),
+                BottomNavItem(
+                    name = "Chat",
+                    route = Constants.ROUTE_CHAT,
+                    icon = Icons.Default.Chat
+                ),
+                BottomNavItem(
+                    name = "Settings",
+                    route = Constants.ROUTE_SETTINGS,
+                    icon = Icons.Default.Settings
+                )
+            ),
+            navController = navController,
+            onItemClick = {
+                navController.navigate(it.route) {
+                    popUpTo(navController.graph.id) {
+                        inclusive = false
+                    }
                 }
             }
-        }
-    )
+        )
+    }
+
 }
 
 @Composable
@@ -115,6 +130,8 @@ fun MainBottomNavBar(
 fun MainBottomNavBarPreview() {
     val navController = rememberNavController()
     MainBottomNavBar(
-        navController = navController
+        navController = navController,
+        videoItems = ArrayList(),
+        isPlaying = true
     )
 }

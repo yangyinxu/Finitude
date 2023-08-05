@@ -9,7 +9,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -26,6 +25,7 @@ import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.media3.common.Player
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.SystemUiController
@@ -80,7 +80,30 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                // Player UI control
+                // Mini Player UI control
+                val isInitiallyPlaying = viewModel.player.isPlaying
+                var isPlayReady by remember {
+                    mutableStateOf(isInitiallyPlaying)
+                }
+                val playerListener = object: Player.Listener {
+                    override fun onPlaybackStateChanged(playbackState: Int) {
+                        super.onPlaybackStateChanged(playbackState)
+                        // Player.STATE_BUFFERING
+                        isPlayReady = playbackState == Player.STATE_READY
+                    }
+
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        super.onIsPlayingChanged(isPlaying)
+                        Log.e("info", "is playing: " + isPlaying)
+                        /*
+                        isPlayReady = isPlaying
+
+                         */
+                    }
+                }
+                viewModel.player.addListener(playerListener)
+
+                // Video Player UI control
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
                 val systemUiController: SystemUiController = rememberSystemUiController()
@@ -98,7 +121,11 @@ class MainActivity : ComponentActivity() {
                         }
                         // hide the bottom bar when the route is player
                         if (currentRoute != ROUTE_PLAYER) {
-                            MainBottomNavBar(navController = navController)
+                            MainBottomNavBar(
+                                navController = navController,
+                                videoItems = videoItems,
+                                isPlaying = isPlayReady
+                            )
                         }
                     }
                 ) { bottomNavBarPadding ->

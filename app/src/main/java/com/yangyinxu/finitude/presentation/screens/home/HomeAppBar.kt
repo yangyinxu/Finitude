@@ -23,7 +23,7 @@ fun DefaultHomeAppBar(
         actions = {
             PlayerAction(onPlayerClicked)
         },
-        backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor
+        backgroundColor = MaterialTheme.colors.appBarBackgroundColor
     )
 }
 
@@ -37,7 +37,7 @@ fun PlayerAction(
         Icon(
             imageVector = Icons.Filled.PlayCircle,
             contentDescription = "Player Icon",
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colors.appBarContentColor
         )
     }
 }
