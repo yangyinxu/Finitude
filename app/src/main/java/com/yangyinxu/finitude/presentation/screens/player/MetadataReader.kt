@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.player
+package com.yangyinxu.finitude.presentation.screens.player
 
 import android.app.Application
 import android.net.Uri

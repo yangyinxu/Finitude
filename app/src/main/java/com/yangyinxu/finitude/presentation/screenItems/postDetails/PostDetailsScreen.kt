@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.postDetails
+package com.yangyinxu.finitude.presentation.screenItems.postDetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

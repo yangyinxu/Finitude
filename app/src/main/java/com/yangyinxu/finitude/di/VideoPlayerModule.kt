@@ -3,8 +3,8 @@ package com.yangyinxu.finitude.di
 import android.app.Application
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import com.yangyinxu.finitude.presentation.player.MetadataReader
-import com.yangyinxu.finitude.presentation.player.MetadataReaderImpl
+import com.yangyinxu.finitude.presentation.screens.player.MetadataReader
+import com.yangyinxu.finitude.presentation.screens.player.MetadataReaderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

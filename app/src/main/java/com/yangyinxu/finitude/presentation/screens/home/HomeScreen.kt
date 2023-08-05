@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.home
+package com.yangyinxu.finitude.presentation.screens.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.yangyinxu.finitude.R
-import com.yangyinxu.finitude.presentation.posts.PostItem
+import com.yangyinxu.finitude.presentation.screenItems.posts.PostItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

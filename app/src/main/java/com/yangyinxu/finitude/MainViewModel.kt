@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
-import com.yangyinxu.finitude.presentation.player.MetadataReader
-import com.yangyinxu.finitude.presentation.player.VideoItem
+import com.yangyinxu.finitude.presentation.screens.player.MetadataReader
+import com.yangyinxu.finitude.presentation.screens.player.VideoItem
 import com.yangyinxu.finitude.util.Constants.PLAYER_SUBSCRIPTION_TIMEOUT
 import com.yangyinxu.finitude.util.Constants.PLAYER_VIDEO_URIS_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.player
+package com.yangyinxu.finitude.presentation.screens.player
 
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher

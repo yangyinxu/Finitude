@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.home
+package com.yangyinxu.finitude.presentation.screens.home
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.posts
+package com.yangyinxu.finitude.presentation.screenItems.posts
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -56,8 +56,8 @@ fun PostItem(
                 .background(MaterialTheme.colors.postBgColor)
         ) {
             // Text(text = "Item $id")
-            PostTitle(title = title)
-            PostContent(
+            PostItemTitle(title = title)
+            PostItemContent(
                 description = description,
                 imageUrl = imageUrl
             )
@@ -80,7 +80,7 @@ fun PostItemPreview(
 }
 
 @Composable
-fun PostTitle(
+fun PostItemTitle(
     title: String
 ) {
     Row {
@@ -95,7 +95,7 @@ fun PostTitle(
 }
 
 @Composable
-fun PostContent(
+fun PostItemContent(
     description: String,
     imageUrl: String = ""
 ) {

@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.settings
+package com.yangyinxu.finitude.presentation.screens.chat
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,13 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SettingsScreen(
+fun ChatScreen(
 
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Settings Screen")
+        Text(text = "Chat Screen")
     }
 }

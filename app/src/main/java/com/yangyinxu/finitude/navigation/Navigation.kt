@@ -12,12 +12,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.yangyinxu.finitude.MainViewModel
-import com.yangyinxu.finitude.presentation.chat.ChatScreen
-import com.yangyinxu.finitude.presentation.home.HomeScreen
-import com.yangyinxu.finitude.presentation.player.PlayerScreen
-import com.yangyinxu.finitude.presentation.player.VideoItem
-import com.yangyinxu.finitude.presentation.postDetails.PostDetails
-import com.yangyinxu.finitude.presentation.settings.SettingsScreen
+import com.yangyinxu.finitude.presentation.screens.chat.ChatScreen
+import com.yangyinxu.finitude.presentation.screens.home.HomeScreen
+import com.yangyinxu.finitude.presentation.screens.player.PlayerScreen
+import com.yangyinxu.finitude.presentation.screens.player.VideoItem
+import com.yangyinxu.finitude.presentation.screenItems.postDetails.PostDetails
+import com.yangyinxu.finitude.presentation.screens.settings.SettingsScreen
 import com.yangyinxu.finitude.util.Constants
 import com.yangyinxu.finitude.util.Constants.POST_DETAILS_ARGUMENT_KEY
 
