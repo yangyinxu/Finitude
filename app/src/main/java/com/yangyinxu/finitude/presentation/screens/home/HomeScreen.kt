@@ -49,7 +49,7 @@ fun HomeScreenContent(
                     id = index,
                     title = stringResource(id = R.string.test_title),
                     description = stringResource(id = R.string.test_description),
-                    imageUrl = stringResource(id = R.string.test_image_url)
+                    imageUrl = stringResource(id = R.string.test_album_image_url)
                 )
             }
         }

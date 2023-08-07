@@ -65,7 +65,11 @@ fun SetupNavigation(
         composable(
             route = Constants.ROUTE_SETTINGS
         ) {
-            SettingsScreen()
+            SettingsScreen(
+                // TODO: Replace with real navigation callback
+                navigateToLogIn = {},
+                navigateToAccountDetails = {}
+            )
         }
         composable(
             route = Constants.ROUTE_POST_DETAILS,

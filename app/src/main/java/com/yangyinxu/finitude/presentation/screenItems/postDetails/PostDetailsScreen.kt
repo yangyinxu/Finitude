@@ -29,7 +29,7 @@ fun PostDetails(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth(),
-            model = stringResource(id = R.string.test_image_url),
+            model = stringResource(id = R.string.test_album_image_url),
             contentDescription = "Post Image"
         )
         PostDetailsContent(
