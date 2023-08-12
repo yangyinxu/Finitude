@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -28,7 +27,6 @@ fun SetupNavigation(
     viewModel: MainViewModel,
     videoItems: List<VideoItem>,
     selectVideoLauncher: ManagedActivityResultLauncher<String, Uri?>,
-    lifecycle: Lifecycle.Event
     // sharedViewModel: SharedViewModel
 ) {
 
@@ -59,8 +57,8 @@ fun SetupNavigation(
             PlayerScreen(
                 viewModel = viewModel,
                 videoItems = videoItems,
-                selectVideoLauncher = selectVideoLauncher,
-                lifecycle = lifecycle)
+                selectVideoLauncher = selectVideoLauncher
+            )
         }
         composable(
             route = Constants.ROUTE_SETTINGS

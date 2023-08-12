@@ -1,7 +1,6 @@
 package com.yangyinxu.finitude
 
 import android.annotation.SuppressLint
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -12,18 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import androidx.media3.common.Player
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -67,6 +63,7 @@ class MainActivity : ComponentActivity() {
                 // TODO: Look for a better way to pause the player when
                 //  the activity is paused
                 // this variable will help sync the lifecycle with the player
+                /*
                 var lifecycle by remember {
                     mutableStateOf(Lifecycle.Event.ON_CREATE)
                 }
@@ -84,6 +81,7 @@ class MainActivity : ComponentActivity() {
                         lifecycleOwner.lifecycle.removeObserver(observer)
                     }
                 }
+                 */
 
                 // Mini Player UI control
                 var isPlayReady by remember {
@@ -116,12 +114,21 @@ class MainActivity : ComponentActivity() {
                         systemUiController.isStatusBarVisible = (currentRoute != ROUTE_PLAYER) // Status bar
                         systemUiController.isNavigationBarVisible = (currentRoute != ROUTE_PLAYER) // Navigation bar
                         systemUiController.isSystemBarsVisible = (currentRoute != ROUTE_PLAYER) // Status & Navigation bars
-                        // lock to landscape mode for player
                         if (currentRoute == ROUTE_PLAYER) {
+                            systemUiController.systemBarsBehavior =
+                                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                        } else {
+                            systemUiController.systemBarsBehavior =
+                                WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
+                        }
+                        // lock to landscape mode for player
+                        /*
+                        if (currentRoute == ROUTE_PLAYER)  {
                             this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                         } else {
                             this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                         }
+                         */
                         // hide the bottom bar when the route is player
                         if (currentRoute != ROUTE_PLAYER) {
                             MainBottomNavBar(
@@ -143,8 +150,7 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             viewModel = viewModel,
                             videoItems = videoItems,
-                            selectVideoLauncher = selectVideoLauncher,
-                            lifecycle = lifecycle
+                            selectVideoLauncher = selectVideoLauncher
                         )
                     }
                 }

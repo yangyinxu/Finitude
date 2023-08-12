@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.Lifecycle
 import androidx.media3.ui.PlayerView
 import com.yangyinxu.finitude.MainViewModel
 import com.yangyinxu.finitude.ui.theme.LARGE_PADDING
@@ -30,41 +30,70 @@ fun PlayerScreen(
     viewModel: MainViewModel,
     videoItems: List<VideoItem>,
     selectVideoLauncher: ManagedActivityResultLauncher<String, Uri?>,
-    lifecycle: Lifecycle.Event
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        AndroidView(
-            factory = { context ->
-                PlayerView(context).also { playerView ->
-                    playerView.player = viewModel.player
-                }
-            },
-            update = {
-                     when (lifecycle) {
-                         Lifecycle.Event.ON_PAUSE -> {
-                             it.onPause()
-                             it.player?.pause()
-                         }
-                         Lifecycle.Event.ON_RESUME -> {
-                             it.onResume()
-                         }
-                         else -> Unit
-                     }
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                // TODO: should be adjusted for different screen size
-                // .aspectRatio()
+        DefaultPlayerScreen(
+            viewModel = viewModel,
+            videoItems = videoItems,
+            selectVideoLauncher = selectVideoLauncher
         )
-        PlayerTools(
-            viewModel,
-            videoItems,
-            selectVideoLauncher
-        )
+        /*
+        TODO: Add Portrait Player Screen with more details
+
+        val configuration = LocalConfiguration.current
+        when (configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+
+            }
+            else -> {
+
+            }
+        }
+         */
     }
+}
+
+@Composable
+fun DefaultPlayerScreen(
+    viewModel: MainViewModel,
+    videoItems: List<VideoItem>,
+    selectVideoLauncher: ManagedActivityResultLauncher<String, Uri?>,
+) {
+    viewModel.player.playWhenReady = true
+
+    AndroidView(
+        factory = { context ->
+            PlayerView(context).also { playerView ->
+                playerView.player = viewModel.player
+            }
+        },
+        update = {
+            /*
+            when (lifecycle) {
+                Lifecycle.Event.ON_PAUSE -> {
+                    it.onPause()
+                    it.player?.pause()
+                }
+                Lifecycle.Event.ON_RESUME -> {
+                    it.onResume()
+                }
+                else -> Unit
+            }
+             */
+        },
+        modifier = Modifier
+            .fillMaxSize()
+        // TODO: should be adjusted for different screen size
+        // .aspectRatio()
+    )
+    PlayerTools(
+        viewModel,
+        videoItems,
+        selectVideoLauncher
+    )
 }
 
 @Composable
