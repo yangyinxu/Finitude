@@ -16,6 +16,7 @@ import com.yangyinxu.finitude.presentation.screens.home.HomeScreen
 import com.yangyinxu.finitude.presentation.screens.player.PlayerScreen
 import com.yangyinxu.finitude.presentation.screens.player.VideoItem
 import com.yangyinxu.finitude.presentation.screenItems.postDetails.PostDetails
+import com.yangyinxu.finitude.presentation.screens.settings.LoginScreen
 import com.yangyinxu.finitude.presentation.screens.settings.SettingsScreen
 import com.yangyinxu.finitude.util.Constants
 import com.yangyinxu.finitude.util.Constants.POST_DETAILS_ARGUMENT_KEY
@@ -38,6 +39,7 @@ fun SetupNavigation(
         navController = navController,
         startDestination = Constants.ROUTE_HOME
     ) {
+        // Home
         composable(
             route = Constants.ROUTE_HOME
         ) {
@@ -46,29 +48,8 @@ fun SetupNavigation(
                 navigateToPlayer = screen.player
             )
         }
-        composable(
-            route = Constants.ROUTE_CHAT
-        ) {
-            ChatScreen()
-        }
-        composable(
-            route = Constants.ROUTE_PLAYER
-        ) {
-            PlayerScreen(
-                viewModel = viewModel,
-                videoItems = videoItems,
-                selectVideoLauncher = selectVideoLauncher
-            )
-        }
-        composable(
-            route = Constants.ROUTE_SETTINGS
-        ) {
-            SettingsScreen(
-                // TODO: Replace with real navigation callback
-                navigateToLogIn = {},
-                navigateToAccountDetails = {}
-            )
-        }
+
+        // Post Details
         composable(
             route = Constants.ROUTE_POST_DETAILS,
             arguments = listOf(
@@ -82,6 +63,45 @@ fun SetupNavigation(
             PostDetails(
                 navigateToHomeScreen = screen.home,
                 id = postId,
+            )
+        }
+
+        // Chat
+        composable(
+            route = Constants.ROUTE_CHAT
+        ) {
+            ChatScreen()
+        }
+
+        // Player
+        composable(
+            route = Constants.ROUTE_PLAYER
+        ) {
+            PlayerScreen(
+                viewModel = viewModel,
+                videoItems = videoItems,
+                selectVideoLauncher = selectVideoLauncher
+            )
+        }
+
+        // Settings
+        composable(
+            route = Constants.ROUTE_SETTINGS
+        ) {
+            SettingsScreen(
+                navigateToLogIn = screen.login,
+                navigateToAccountDetails = {
+                    println("navigate to account details")
+                }
+            )
+        }
+
+        // Login
+        composable(
+            route = Constants.ROUTE_LOGIN
+        ) {
+            LoginScreen(
+                navController = navController
             )
         }
     }

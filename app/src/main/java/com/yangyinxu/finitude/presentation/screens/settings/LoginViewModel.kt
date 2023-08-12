@@ -23,16 +23,17 @@ class LoginViewModel @Inject constructor(
     private val validatePassword: ValidatePassword
 ): ViewModel() {
 
-    var state by mutableStateOf(LoginFormState())
+    var loginFormState by mutableStateOf(LoginFormState())
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
 
-    private var emailResult = validateEmail.execute(state.email)
-    private var passwordResult = validatePassword.execute(state.password)
+    private var emailResult = validateEmail.execute(loginFormState.email)
+    private var passwordResult = validatePassword.execute(loginFormState.password)
 
     sealed class ValidationEvent {
         object LocalValidationSuccess: ValidationEvent()
         object RemoteValidationSuccess: ValidationEvent()
+        object RemoteValidationFailed: ValidationEvent()
     }
 
     fun onEvent(event: LoginFormEvent) {
@@ -40,11 +41,17 @@ class LoginViewModel @Inject constructor(
             is LoginFormEvent.EmailChanged -> {
                 // make an independent copy of the state (event.email is immutable)
                 emailResult = validateEmail.execute(event.email)
-                state = state.copy(email = event.email, emailError = emailResult.errorMessage)
+                loginFormState = loginFormState.copy(
+                    email = event.email,
+                    emailError = emailResult.errorMessage
+                )
             }
             is LoginFormEvent.PasswordChanged -> {
                 passwordResult = validatePassword.execute(event.password)
-                state = state.copy(password = event.password, passwordError = passwordResult.errorMessage)
+                loginFormState = loginFormState.copy(
+                    password = event.password,
+                    passwordError = passwordResult.errorMessage
+                )
             }
             is LoginFormEvent.Submit -> {
                 submitData()
@@ -59,7 +66,7 @@ class LoginViewModel @Inject constructor(
         ).any { it.errorMessage != null }
 
         if (hasError) {
-            state = state.copy(
+            loginFormState = loginFormState.copy(
                 emailError = emailResult.errorMessage,
                 passwordError = passwordResult.errorMessage
             )
@@ -69,7 +76,8 @@ class LoginViewModel @Inject constructor(
         // send login request to the api
         viewModelScope.launch {
             val loginRequestBody = LoginRequestBody(
-                state.email, state.password
+                loginFormState.email,
+                loginFormState.password
             )
             when (val loginResult = archRepo.postLogin(loginRequestBody)) {
                 is Resource.Success -> {
@@ -78,6 +86,7 @@ class LoginViewModel @Inject constructor(
                 else -> {
                     println("Failed to login")
                     println(loginResult.message)
+                    validationEventChannel.send(ValidationEvent.RemoteValidationFailed)
                 }
             }
         }

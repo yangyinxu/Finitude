@@ -39,8 +39,8 @@ fun SettingsScreen(
     }
     Row {
         Account(
-            navigateToLogIn,
-            navigateToAccountDetails
+            navigateToLogin = navigateToLogIn,
+            navigateToAccountDetails = navigateToAccountDetails
         )
     }
 }
