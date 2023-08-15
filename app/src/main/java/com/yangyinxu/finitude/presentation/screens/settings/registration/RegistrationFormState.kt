@@ -1,6 +1,8 @@
 package com.yangyinxu.finitude.presentation.screens.settings.registration
 
 data class RegistrationFormState(
+    val username: String = "",
+    val usernameError: String? = null,
     val email: String = "",
     val emailError: String? = null,
     val password: String = "",

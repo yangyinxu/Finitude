@@ -93,6 +93,8 @@ fun RegistrationScreen(
                 .clip(MaterialTheme.shapes.medium)
                 .align(Alignment.CenterHorizontally)
         )
+        UsernameField(state = state, viewModel = viewModel)
+        Spacer(modifier = Modifier.height(16.dp))
         EmailAddressField(state = state, viewModel = viewModel)
         Spacer(modifier = Modifier.height(16.dp))
         PasswordField(state = state, viewModel = viewModel)
@@ -104,6 +106,35 @@ fun RegistrationScreen(
         RegistrationSubmitButton(modifier = Modifier.fillMaxWidth(), viewModel = viewModel)
         Spacer(modifier = Modifier.height(16.dp))
         LoginButton(navController = navController, modifier = Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+fun UsernameField(
+    state: RegistrationFormState,
+    viewModel: RegistrationViewModel
+) {
+    TextField(
+        value = state.username,
+        onValueChange = {
+            viewModel.onEvent(RegistrationFormEvent.UsernameChanged(it))
+        },
+        isError = state.usernameError != null,
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = {
+            Text(text = "Username")
+        },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        maxLines = 1,
+        singleLine = true,
+    )
+    if (state.usernameError != null) {
+        Text(
+            text = state.usernameError,
+            color = MaterialTheme.colors.error
+        )
     }
 }
 
@@ -129,6 +160,12 @@ fun EmailAddressField(
         maxLines = 1,
         singleLine = true,
     )
+    if (state.emailError != null) {
+        Text(
+            text = state.emailError,
+            color = MaterialTheme.colors.error
+        )
+    }
 }
 
 @Composable
@@ -232,6 +269,7 @@ fun RegistrationSubmitButton(
 ) {
     Button(
         onClick = {
+            println("Registration submit button clicked")
             viewModel.onEvent(RegistrationFormEvent.Submit)
         },
         modifier = modifier

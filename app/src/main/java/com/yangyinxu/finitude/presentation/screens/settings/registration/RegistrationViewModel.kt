@@ -12,6 +12,7 @@ import com.yangyinxu.finitude.domain.use_case.ValidateEmail
 import com.yangyinxu.finitude.domain.use_case.ValidatePassword
 import com.yangyinxu.finitude.domain.use_case.ValidateRepeatedPassword
 import com.yangyinxu.finitude.domain.use_case.ValidateTerms
+import com.yangyinxu.finitude.domain.use_case.ValidateUsername
 import com.yangyinxu.finitude.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val archRepo: ArchtreeRepository,
+    private val validateUsername: ValidateUsername,
     private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword,
     private val validateRepeatedPassword: ValidateRepeatedPassword,
@@ -34,6 +36,7 @@ class RegistrationViewModel @Inject constructor(
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
 
+    private var usernameResult = validateUsername.execute(state.username)
     private var emailResult = validateEmail.execute(state.email)
     private var passwordResult = validatePassword.execute(state.password)
     private var repeatedPasswordResult = validateRepeatedPassword.execute(
@@ -42,6 +45,10 @@ class RegistrationViewModel @Inject constructor(
 
     fun onEvent(event: RegistrationFormEvent) {
         when (event) {
+            is RegistrationFormEvent.UsernameChanged -> {
+                usernameResult = validateUsername.execute(event.username)
+                state = state.copy(username = event.username, usernameError = usernameResult.errorMessage)
+            }
             is RegistrationFormEvent.EmailChanged -> {
                 // make an independent copy of the state (event.email is immutable)
                 emailResult = validateEmail.execute(event.email)
@@ -61,6 +68,7 @@ class RegistrationViewModel @Inject constructor(
                 state = state.copy(acceptedTerms = event.isAccepted, termsError = termsResult.errorMessage)
             }
             is RegistrationFormEvent.Submit -> {
+                println("on Submit event")
                 submitData()
             }
         }
@@ -68,6 +76,7 @@ class RegistrationViewModel @Inject constructor(
 
     private fun submitData() {
         val hasError = listOf(
+            usernameResult,
             emailResult,
             passwordResult,
             repeatedPasswordResult,
@@ -76,6 +85,7 @@ class RegistrationViewModel @Inject constructor(
 
         if (hasError) {
             state = state.copy(
+                usernameError = usernameResult.errorMessage,
                 emailError = emailResult.errorMessage,
                 passwordError = passwordResult.errorMessage,
                 repeatedPasswordError = repeatedPasswordResult.errorMessage,
@@ -91,7 +101,10 @@ class RegistrationViewModel @Inject constructor(
             // send signup request
             // TODO: Add nickname field rather than using email as name
             val signUpRequestBody = SignUpRequestBody(
-                state.email, state.password, state.email)
+                state.email,
+                state.password,
+                state.username
+            )
             when (val signUpResult = archRepo.putSignUp(signUpRequestBody)) {
                 is Resource.Success -> {
                     val signupResponse: SignUpResponse? = signUpResult.data
@@ -100,6 +113,9 @@ class RegistrationViewModel @Inject constructor(
                 }
                 else -> {
                     println("Failed to create a new account")
+                    println("email: ${state.email}")
+                    println("password: ${state.password}")
+                    println("username: ${state.username}")
                 }
             }
         }
