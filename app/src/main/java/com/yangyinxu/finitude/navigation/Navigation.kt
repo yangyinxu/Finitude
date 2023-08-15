@@ -16,7 +16,7 @@ import com.yangyinxu.finitude.presentation.screens.home.HomeScreen
 import com.yangyinxu.finitude.presentation.screens.player.PlayerScreen
 import com.yangyinxu.finitude.presentation.screens.player.VideoItem
 import com.yangyinxu.finitude.presentation.screenItems.postDetails.PostDetails
-import com.yangyinxu.finitude.presentation.screens.settings.LoginScreen
+import com.yangyinxu.finitude.presentation.screens.settings.login.LoginScreen
 import com.yangyinxu.finitude.presentation.screens.settings.SettingsScreen
 import com.yangyinxu.finitude.util.Constants
 import com.yangyinxu.finitude.util.Constants.POST_DETAILS_ARGUMENT_KEY

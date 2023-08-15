@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.screens.settings
+package com.yangyinxu.finitude.presentation.screens.settings.login
 
 data class LoginFormState(
     val email: String = "",

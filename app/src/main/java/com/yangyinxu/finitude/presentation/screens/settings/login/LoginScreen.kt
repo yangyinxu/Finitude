@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.screens.settings
+package com.yangyinxu.finitude.presentation.screens.settings.login
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -33,11 +32,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.yangyinxu.finitude.R
 import com.yangyinxu.finitude.ui.theme.MEDIUM_PADDING
-import com.yangyinxu.finitude.util.Constants.ROUTE_SIGN_UP
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.screens.settings
+package com.yangyinxu.finitude.presentation.screens.settings.login
 
 sealed class LoginFormEvent {
     data class EmailChanged(val email: String): LoginFormEvent()

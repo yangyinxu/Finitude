@@ -1,4 +1,4 @@
-package com.yangyinxu.finitude.presentation.screens.settings
+package com.yangyinxu.finitude.presentation.screens.settings.login
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
