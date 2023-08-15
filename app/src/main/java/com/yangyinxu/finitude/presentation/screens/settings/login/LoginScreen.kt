@@ -35,6 +35,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.yangyinxu.finitude.R
 import com.yangyinxu.finitude.ui.theme.MEDIUM_PADDING
+import com.yangyinxu.finitude.util.Constants.ROUTE_REGISTRATION
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -236,7 +237,7 @@ fun RegistrationButton(
         onClick = {
             println("Sign Up button clicked")
             // TODO: navigate to Signup page
-            // navController.navigate(ROUTE_SIGN_UP)
+            navController.navigate(ROUTE_REGISTRATION)
         }
     ) {
         Text(text = "Sign Up")

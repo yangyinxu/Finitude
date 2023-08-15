@@ -18,6 +18,7 @@ import com.yangyinxu.finitude.presentation.screens.player.VideoItem
 import com.yangyinxu.finitude.presentation.screenItems.postDetails.PostDetails
 import com.yangyinxu.finitude.presentation.screens.settings.login.LoginScreen
 import com.yangyinxu.finitude.presentation.screens.settings.SettingsScreen
+import com.yangyinxu.finitude.presentation.screens.settings.registration.RegistrationScreen
 import com.yangyinxu.finitude.util.Constants
 import com.yangyinxu.finitude.util.Constants.POST_DETAILS_ARGUMENT_KEY
 
@@ -93,6 +94,15 @@ fun SetupNavigation(
                 navigateToAccountDetails = {
                     println("navigate to account details")
                 }
+            )
+        }
+
+        // Registration
+        composable(
+            route = Constants.ROUTE_REGISTRATION
+        ) {
+            RegistrationScreen(
+                navController = navController
             )
         }
 

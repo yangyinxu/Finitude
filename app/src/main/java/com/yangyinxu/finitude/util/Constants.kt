@@ -11,7 +11,7 @@ object Constants {
     const val ROUTE_PLAYER = "player"
     const val ROUTE_SETTINGS = "settings"
     const val ROUTE_LOGIN = "login"
-    const val ROUTE_SIGN_UP = "sign_up"
+    const val ROUTE_REGISTRATION = "registration"
 
     const val ROUTE_POST_DETAILS = "postDetails/{postId}"
 
